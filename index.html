@@ -165,6 +165,39 @@
       padding: 56px 24px 100px;
     }
     
+    /* Main scheme (hero) */
+    .hero {
+      display: flex;
+      gap: 5vw;
+      align-items: center;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      animation: fadeIn 0.8s ease 0.5s backwards;
+    }
+    .hero img {
+      width: 20%;
+      height: auto;
+      border-radius: 16px;
+      display: block;
+    }
+    .hero h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+    .hero p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    
     .intro {
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
@@ -406,6 +439,11 @@
       letter-spacing: -0.5px;
     }
     
+    .Main-img {
+      width: 200px;
+      height: 50px;
+    }
+
     .meta {
       display: inline-flex;
       align-items: center;
@@ -559,6 +597,16 @@
         padding: 40px 20px;
       }
       
+      .hero {
+        display: flex;
+        flex-direction: column;
+        gap: 2vw;
+      }
+
+      .hero img{
+        width: 90%;
+      }
+
       header h1 {
         font-size: 28px;
         letter-spacing: -0.5px;
@@ -749,6 +797,17 @@
       </p>
     </section>
 
+    <section class="hero" aria-label="Қызылорда облысының жобалық макеті">
+      <img src="./images/img-main.png" alt="Қызылорда облысының жобалық макеті" width="200px" height="50px" class="Main-img">
+      <div>
+        <h2>Қызылорда облысының жобалық макеті</h2>
+        <p>
+          Бұл макет аймақтың негізгі инфрақұрылымын, мәдени және туристік нысандарын біріктіріп көрсетеді. 
+          Картада жобалық орталықтардың өзара байланысы мен келушілер үшін бағыттар көрнекі түрде берілген.
+        </p>
+      </div>
+    </section>
+
     <div class="grid" id="centersGrid">
       <article class="card" data-id="suleiler" tabindex="0" role="button">
         <div class="thumb">
@@ -824,7 +883,6 @@
 
   <footer>
     Жоба — Ұлы Жібек жолын қайта жаңғырту<br>
-    Мазмұн мысал ретінде берілген
   </footer>
 
   <script>
