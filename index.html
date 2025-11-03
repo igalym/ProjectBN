@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Қызылорда жобалық орталықтары</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+      --bg-dark: #0a0e1a;
+      --bg-darker: #050812;
+      --accent: #3b82f6;
+      --accent-light: #60a5fa;
+      --accent-glow: rgba(59, 130, 246, 0.3);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Light theme overrides */
+    body.light {
+      --bg-dark: #f5f7fb;
+      --bg-darker: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --glass-bg: rgba(0, 0, 0, 0.04);
+      --glass-border: rgba(0, 0, 0, 0.08);
+      --accent-glow: rgba(59, 130, 246, 0.18);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-darker);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    body::after {
+      content: '';
+      position: fixed;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(30px, -30px) rotate(120deg); }
+      66% { transform: translate(-20px, 20px) rotate(240deg); }
+    }
+    
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes modalSlideIn {
+      from { opacity: 0; transform: scale(0.9) translateY(40px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    
+    header {
+      position: relative;
+      z-index: 10;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 64px 24px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Theme toggle button */
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+      line-height: 1;
+    }
+    
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+    
+    header h1 {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInDown 0.8s ease;
+    }
+    
+    header p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      font-weight: 400;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.7;
+      animation: fadeInUp 0.8s ease 0.2s backwards;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 56px 24px 100px;
+    }
+    
+    .intro {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 48px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      animation: fadeIn 0.8s ease 0.4s backwards;
+    }
+    
+    .intro p {
+      color: var(--text-secondary);
+      font-size: 17px;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      animation: fadeIn 0.8s ease 0.6s backwards;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 60px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+    
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .thumb {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
+      position: relative;
+    }
+    
+    .thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.6) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .card:hover .thumb::after {
+      opacity: 1;
+    }
+    
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+      opacity: 0.9;
+    }
+    
+    .card:hover .thumb img {
+      transform: scale(1.15);
+      opacity: 1;
+    }
+
+    .card-content {
+      padding: 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+      line-height: 1.3;
+      letter-spacing: -0.3px;
+    }
+    
+    .card p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+    }
+    
+    .btn {
+      flex: 1;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px var(--accent-glow), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+    
+    .btn:hover::before {
+      width: 400px;
+      height: 400px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px var(--accent-glow), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+    }
+    
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .modal.open {
+      display: flex;
+    }
+    
+    .modal-card {
+      width: 100%;
+      max-width: 1000px;
+      border-radius: 28px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(40px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      animation: modalSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .modal-left {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .modal-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.1), transparent);
+    }
+    
+    .modal-left img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.95;
+    }
+
+    .modal-right {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .modal-right h2 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+    
+    .meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      padding: 8px 16px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      font-weight: 500;
+      width: fit-content;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    .meta::before {
+      content: '📍';
+      font-size: 16px;
+    }
+    
+    .modal-right p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      font-size: 16px;
+      flex: 1;
+      margin-bottom: 28px;
+    }
+
+    .close-row {
+      display: flex;
+      gap: 14px;
+      justify-content: flex-end;
+    }
+    
+    .close-btn,
+    .visit-btn {
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .close-btn {
+      background: var(--glass-bg);
+      color: var(--text-secondary);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    .close-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+    
+    .close-btn:hover::before {
+      width: 400px;
+      height: 400px;
+    }
+    
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+      color: var(--text-primary);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    
+    .visit-btn {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 20px var(--accent-glow), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    }
+    
+    .visit-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+    
+    .visit-btn:hover::before {
+      width: 400px;
+      height: 400px;
+    }
+    
+    .visit-btn:hover {
+      box-shadow: 0 8px 30px var(--accent-glow), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+      padding: 40px 24px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--glass-border);
+      margin-top: 60px;
+      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    footer::before {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 0 auto 20px;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .modal-card {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+      }
+      
+      .modal-left {
+        min-height: 280px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 40px 20px;
+      }
+      
+      header h1 {
+        font-size: 28px;
+        letter-spacing: -0.5px;
+      }
+      
+      header p {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      
+      .container {
+        padding: 32px 16px 60px;
+      }
+      
+      .intro {
+        padding: 24px;
+        border-radius: 20px;
+        margin-bottom: 32px;
+      }
+      
+      .intro p {
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .card {
+        border-radius: 16px;
+      }
+      
+      .thumb {
+        height: 180px;
+      }
+      
+      .card-content {
+        padding: 20px;
+      }
+      
+      .card h3 {
+        font-size: 19px;
+      }
+      
+      .card p {
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+      
+      .btn {
+        padding: 12px 20px;
+        font-size: 14px;
+        border-radius: 10px;
+      }
+      
+      .modal {
+        padding: 12px;
+      }
+      
+      .modal-card {
+        border-radius: 20px;
+        max-width: 100%;
+      }
+      
+      .modal-left {
+        min-height: 220px;
+      }
+      
+      .modal-right {
+        padding: 24px;
+      }
+      
+      .modal-right h2 {
+        font-size: 22px;
+        margin-bottom: 12px;
+      }
+      
+      .meta {
+        font-size: 13px;
+        padding: 6px 12px;
+        margin-bottom: 16px;
+      }
+      
+      .modal-right p {
+        font-size: 15px;
+        margin-bottom: 20px;
+      }
+      
+      .close-row {
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      
+      .close-btn,
+      .visit-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+        flex: 1;
+        min-width: 120px;
+      }
+      
+      footer {
+        padding: 32px 20px;
+        margin-top: 40px;
+        font-size: 13px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 24px;
+      }
+      
+      header p {
+        font-size: 13px;
+      }
+      
+      .container {
+        padding: 24px 12px 50px;
+      }
+      
+      .intro {
+        padding: 20px;
+        border-radius: 16px;
+      }
+      
+      .intro p {
+        font-size: 14px;
+      }
+      
+      .card-content {
+        padding: 16px;
+      }
+      
+      .card h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+      
+      .card p {
+        font-size: 13px;
+      }
+      
+      .btn {
+        padding: 11px 18px;
+        font-size: 13px;
+      }
+      
+      .modal-right {
+        padding: 20px;
+      }
+      
+      .modal-right h2 {
+        font-size: 20px;
+      }
+      
+      .modal-right p {
+        font-size: 14px;
+      }
+      
+      .close-btn,
+      .visit-btn {
+        padding: 11px 16px;
+        font-size: 13px;
+        width: 100%;
+      }
+      
+      .close-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <!-- <button id="themeToggle" class="theme-toggle" aria-label="Тақырып: жарық/күңгірт">☀️</button> -->
+    <h1>Қызылорда облысының жобалық орталықтары</h1>
+    <p>Сүлейлер аллеясы · Сыр күріші орталығы · Қорқыт ата орталығы · Көшпенділер орталығы</p>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <p>
+        Төмендегі орталықтардың әрқайсысы — облыстың мәдени және туристік әлеуетін арттыруға бағытталған жобалық нысандар. Карточкаларды басып, макет пен толық ақпаратты қараңыз.
+      </p>
+    </section>
+
+    <div class="grid" id="centersGrid">
+      <article class="card" data-id="suleiler" tabindex="0" role="button">
+        <div class="thumb">
+          <img src="./images/img1.png" alt="Сүлейлер аллеясы">
+        </div>
+        <div class="card-content">
+          <h3>Сүлейлер Аллеясы орталығы</h3>
+          <p>Рухани-мәдени орталық: жыраулар мен ақындарға арналған аллея, ескерткіштер, шағын амфитеатр мен әдеби кештер алаңы.</p>
+          <div class="actions">
+            <button class="btn" data-open="suleiler">Көру</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-id="syr" tabindex="0" role="button">
+        <div class="thumb">
+          <img src="./images/img2.png" alt="Сыр күріші орталығы">
+        </div>
+        <div class="card-content">
+          <h3>Сыр күріші орталығы</h3>
+          <p>Агро-туризм орталығы: күріш тарихы, интерактив экспозициялар, өңдеу зауыты макеті және экскурсиялық бағдарламалар.</p>
+          <div class="actions">
+            <button class="btn" data-open="syr">Көру</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-id="korkyt" tabindex="0" role="button">
+        <div class="thumb">
+          <img src="./images/img3.png" alt="Қорқыт ата орталығы">
+        </div>
+        <div class="card-content">
+          <h3>Қорқыт ата орталығы</h3>
+          <p>Түркі және қазақ мәдениеті бойынша музей-мұражай кешені: мультимедиа экспозициялар, музыка залы, халықаралық мәдени байланыстар.</p>
+          <div class="actions">
+            <button class="btn" data-open="korkyt">Көру</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-id="koshpendi" tabindex="0" role="button">
+        <div class="thumb">
+          <img src="./images/img4.png" alt="Көшпенділер орталығы">
+        </div>
+        <div class="card-content">
+          <h3>Көшпенділер орталығы</h3>
+          <p>Этнотуризм: киіз үй қалашығы, қолөнер шеберханалары, ұлттық ойындар мен ат спорты алаңдары.</p>
+          <div class="actions">
+            <button class="btn" data-open="koshpendi">Көру</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-card" role="document">
+      <div class="modal-left">
+        <img id="modalImg" src="" alt="">
+      </div>
+      <div class="modal-right">
+        <h2 id="modalTitle">Title</h2>
+        <div class="meta" id="modalMeta">Орналасқан жер</div>
+        <p id="modalDesc">Толық сипаттама мұнда шығады...</p>
+
+        <div class="close-row">
+          <button class="close-btn" id="closeSimple">Жабу</button>
+          <button class="visit-btn" id="learnMore">Толығырақ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Жоба — Ұлы Жібек жолын қайта жаңғырту<br>
+    Мазмұн мысал ретінде берілген
+  </footer>
+
+  <script>
+    const centers = {
+      suleiler: {
+        title: "Сүлейлер Аллеясы орталығы",
+        img: "./images/img1.png",
+        meta: "Қызылорда қаласы, негізгі аймақ",
+        desc: "Сүлейлер аллеясы — жыраулар мен ақындарға арналған рухани-мәдени кешен. Құрамына ашық аллея, ескерткіштер, кіші амфитеатр, әдеби және мәдени шаралар өткізіледі. Жастарды тәрбиелеу және әдеби мұраны сақтауға бағытталған."
+      },
+      syr: {
+        title: "Сыр күріші орталығы",
+        img: "./images/img2.png",
+        meta: "Сырдария өңірі, агро-туризм аймағы",
+        desc: "Сыр күріші орталығы күріш тарихын, өндіру технологиясын таныстыратын интерактив экспозициядан тұрады. Агро-туризм, демонстрациялық зауыт макеті және жергілікті өнімдерді сату орындары жоспарланған."
+      },
+      korkyt: {
+        title: "Қорқыт ата орталығы",
+        img: "./images/img3.png",
+        meta: "Қармақшы ауданы маңы",
+        desc: "Қорқыт ата орталығы түркі әлемінің мәдени мұрасын насихаттайтын музей-комплекс. Мультимедиа экспозициялар, музыка залы, халықаралық конференциялар өткізу мүмкіндігі қарастырылған."
+      },
+      koshpendi: {
+        title: "Көшпенділер орталығы",
+        img: "./images/img4.png",
+        meta: "Облыстың батыс бөлігі",
+        desc: "Көшпенділер орталығы — киіз үй қалашығы, ұлттық қолөнер шеберханалары және дәстүрлі ойындар алаңы. Этнофестивальдер мен туристік бағдарламаларды өткізуге бағытталған."
+      }
+    };
+
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalMeta = document.getElementById('modalMeta');
+
+    function openModal(key) {
+      const data = centers[key];
+      if (!data) return;
+      modalImg.src = data.img;
+      modalImg.alt = data.title;
+      modalTitle.textContent = data.title;
+      modalMeta.textContent = data.meta;
+      modalDesc.textContent = data.desc;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-open]').forEach(btn => {
+      btn.addEventListener('click', () => openModal(btn.getAttribute('data-open')));
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal || e.target.id === 'closeSimple') closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    document.getElementById('learnMore').addEventListener('click', () => {
+      alert('Бұл бөлімде жобаның техникалық сипаттамасы, сызбалар және қаржыландыру жоспары көрсетіледі (мысал).');
+    });
+
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          const btn = card.querySelector('[data-open]');
+          if (btn) openModal(btn.getAttribute('data-open'));
+        }
+      });
+    });
+
+    // Theme toggle logic with persistence
+    const themeToggleBtn = document.getElementById('themeToggle');
+    function updateThemeIcon() {
+      if (!themeToggleBtn) return;
+      themeToggleBtn.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
+    }
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        document.body.classList.add('light');
+      } else {
+        document.body.classList.remove('light');
+      }
+      localStorage.setItem('theme', theme);
+      updateThemeIcon();
+    }
+    const savedTheme = localStorage.getItem('theme');
+    applyTheme(savedTheme === 'light' ? 'light' : 'dark');
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        const next = document.body.classList.contains('light') ? 'dark' : 'light';
+        applyTheme(next);
+      });
+    }
+  </script>
+</body>
+</html>
