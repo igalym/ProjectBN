@@ -320,6 +320,7 @@
 
     .actions {
       display: flex;
+      flex-direction: column;
       gap: 12px;
     }
     
@@ -368,6 +369,19 @@
       transform: translateY(0);
     }
 
+    .btn[data-video] {
+      background: linear-gradient(135deg, #9333ea 0%, #a855f7 100%);
+      box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    }
+
+    .btn[data-video]:hover {
+      box-shadow: 0 8px 30px rgba(147, 51, 234, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+    }
+
+    .btn[data-video]::before {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
     .modal {
       position: fixed;
       inset: 0;
@@ -397,6 +411,7 @@
       display: grid;
       grid-template-columns: 1fr 480px;
       animation: modalSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
     }
     
     .modal-left {
@@ -474,13 +489,42 @@
       margin-bottom: 28px;
     }
 
-    .close-row {
+    .modal-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      font-size: 28px;
+      font-weight: 300;
+      line-height: 1;
+      cursor: pointer;
+      transition: all 0.3s ease;
       display: flex;
-      gap: 14px;
-      justify-content: flex-end;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.4);
+      transform: rotate(90deg) scale(1.1);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+    }
+
+    .modal-close-btn:active {
+      transform: rotate(90deg) scale(0.95);
     }
     
-    .close-btn,
     .visit-btn {
       padding: 14px 28px;
       border-radius: 12px;
@@ -492,42 +536,6 @@
       letter-spacing: 0.5px;
       position: relative;
       overflow: hidden;
-    }
-    
-    .close-btn {
-      background: var(--accent);
-      color:white;
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-    
-    .close-btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s ease, height 0.6s ease;
-    }
-    
-    .close-btn:hover::before {
-      width: 400px;
-      height: 400px;
-    }
-    
-    .close-btn:hover {
-      background: var(--accent);
-      transform: translateY(-2px);
-      color: var(--text-primary);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    }
-    
-    .visit-btn {
       background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
       color: #fff;
       border: none;
@@ -555,6 +563,86 @@
     .visit-btn:hover {
       box-shadow: 0 8px 30px var(--accent-glow), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
       transform: translateY(-2px);
+    }
+
+    .video-modal-card {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 28px;
+      background: var(--bg-dark);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      animation: modalSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      background: #000;
+      overflow: hidden;
+    }
+
+    .video-container iframe,
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-modal-header {
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--glass-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--glass-bg);
+      position: relative;
+    }
+
+    .video-modal-header h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .video-close-btn {
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      font-size: 28px;
+      font-weight: 300;
+      line-height: 1;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .video-close-btn:hover {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.4);
+      transform: rotate(90deg) scale(1.1);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+    }
+
+    .video-close-btn:active {
+      transform: rotate(90deg) scale(0.95);
     }
 
     footer {
@@ -696,18 +784,39 @@
         font-size: 15px;
         margin-bottom: 20px;
       }
-      
-      .close-row {
-        gap: 10px;
-        flex-wrap: wrap;
+
+      .modal-close-btn {
+        top: 16px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+        font-size: 24px;
       }
       
-      .close-btn,
       .visit-btn {
         padding: 12px 20px;
         font-size: 14px;
         flex: 1;
         min-width: 120px;
+      }
+
+      .video-modal-card {
+        max-width: 100%;
+        border-radius: 20px;
+      }
+
+      .video-modal-header {
+        padding: 16px 20px;
+      }
+
+      .video-modal-header h2 {
+        font-size: 20px;
+      }
+
+      .video-close-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 24px;
       }
       
       footer {
@@ -768,16 +877,37 @@
       .modal-right p {
         font-size: 14px;
       }
-      
-      .close-btn,
-      .visit-btn {
-        padding: 11px 16px;
-        font-size: 13px;
-        width: 100%;
+
+      .modal-close-btn {
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        font-size: 20px;
       }
-      
-      .close-row {
-        flex-direction: column;
+
+      .video-modal-card {
+        border-radius: 16px;
+      }
+
+      .video-modal-header {
+        padding: 12px 16px;
+        padding-right: 56px;
+        position: relative;
+      }
+
+      .video-modal-header h2 {
+        font-size: 18px;
+        margin-right: auto;
+      }
+
+      .video-close-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        font-size: 20px;
       }
     }
   </style>
@@ -818,6 +948,7 @@
           <p>Рухани-мәдени орталық: жыраулар мен ақындарға арналған аллея, ескерткіштер, шағын амфитеатр мен әдеби кештер алаңы.</p>
           <div class="actions">
             <button class="btn" data-open="suleiler">Көру</button>
+            <button class="btn" data-video="suleiler">Бейнежазба</button>
           </div>
         </div>
       </article>
@@ -831,6 +962,7 @@
           <p>Агро-туризм орталығы: күріш тарихы, интерактив экспозициялар, өңдеу зауыты макеті және экскурсиялық бағдарламалар.</p>
           <div class="actions">
             <button class="btn" data-open="syr">Көру</button>
+            <button class="btn" data-video="syr">Бейнежазба</button>
           </div>
         </div>
       </article>
@@ -844,6 +976,7 @@
           <p>Түркі және қазақ мәдениеті бойынша музей-мұражай кешені: мультимедиа экспозициялар, музыка залы, халықаралық мәдени байланыстар.</p>
           <div class="actions">
             <button class="btn" data-open="korkyt">Көру</button>
+            <button class="btn" data-video="korkyt">Бейнежазба</button>
           </div>
         </div>
       </article>
@@ -857,6 +990,7 @@
           <p>Этнотуризм: киіз үй қалашығы, қолөнер шеберханалары, ұлттық ойындар мен ат спорты алаңдары.</p>
           <div class="actions">
             <button class="btn" data-open="koshpendi">Көру</button>
+            <button class="btn" data-video="koshpendi">Бейнежазба</button>
           </div>
         </div>
       </article>
@@ -865,6 +999,7 @@
 
   <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal-card" role="document">
+      <button class="modal-close-btn" id="closeSimple" aria-label="Жабу">×</button>
       <div class="modal-left">
         <img id="modalImg" src="" alt="">
       </div>
@@ -872,10 +1007,18 @@
         <h2 id="modalTitle">Title</h2>
         <div class="meta" id="modalMeta">Орналасқан жер</div>
         <p id="modalDesc">Толық сипаттама мұнда шығады...</p>
+      </div>
+    </div>
+  </div>
 
-        <div class="close-row">
-          <button class="close-btn" id="closeSimple">Жабу</button>
-        </div>
+  <div id="videoModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="video-modal-card" role="document">
+      <div class="video-modal-header">
+        <h2 id="videoModalTitle">Бейнежазба</h2>
+        <button class="video-close-btn" id="closeVideo" aria-label="Жабу">×</button>
+      </div>
+      <div class="video-container" id="videoContainer">
+        <!-- Video will be inserted here -->
       </div>
     </div>
   </div>
@@ -890,25 +1033,29 @@
         title: "Сүлейлер Аллеясы орталығы",
         img: "./images/img1.png",
         meta: "Қызылорда қаласы, негізгі аймақ",
-        desc: "Сүлейлер аллеясы — жыраулар мен ақындарға арналған рухани-мәдени кешен. Құрамына ашық аллея, ескерткіштер, кіші амфитеатр, әдеби және мәдени шаралар өткізіледі. Жастарды тәрбиелеу және әдеби мұраны сақтауға бағытталған."
+        desc: "Сүлейлер аллеясы — жыраулар мен ақындарға арналған рухани-мәдени кешен. Құрамына ашық аллея, ескерткіштер, кіші амфитеатр, әдеби және мәдени шаралар өткізіледі. Жастарды тәрбиелеу және әдеби мұраны сақтауға бағытталған.",
+        video: "./video/suleiler.mp4" // YouTube embed URL or video file path - add your video URL here
       },
       syr: {
         title: "Сыр күріші орталығы",
         img: "./images/img2.png",
         meta: "Сырдария өңірі, агро-туризм аймағы",
-        desc: "Сыр күріші орталығы күріш тарихын, өндіру технологиясын таныстыратын интерактив экспозициядан тұрады. Агро-туризм, демонстрациялық зауыт макеті және жергілікті өнімдерді сату орындары жоспарланған."
+        desc: "Сыр күріші орталығы күріш тарихын, өндіру технологиясын таныстыратын интерактив экспозициядан тұрады. Агро-туризм, демонстрациялық зауыт макеті және жергілікті өнімдерді сату орындары жоспарланған.",
+        video: "./video/suleiler.mp4" // YouTube embed URL or video file path - add your video URL here
       },
       korkyt: {
         title: "Қорқыт ата орталығы",
         img: "./images/img3.png",
         meta: "Қармақшы ауданы маңы",
-        desc: "Қорқыт ата орталығы түркі әлемінің мәдени мұрасын насихаттайтын музей-комплекс. Мультимедиа экспозициялар, музыка залы, халықаралық конференциялар өткізу мүмкіндігі қарастырылған."
+        desc: "Қорқыт ата орталығы түркі әлемінің мәдени мұрасын насихаттайтын музей-комплекс. Мультимедиа экспозициялар, музыка залы, халықаралық конференциялар өткізу мүмкіндігі қарастырылған.",
+        video: "./video/suleiler.mp4" // YouTube embed URL or video file path - add your video URL here
       },
       koshpendi: {
         title: "Көшпенділер орталығы",
         img: "./images/img4.png",
         meta: "Облыстың батыс бөлігі",
-        desc: "Көшпенділер орталығы — киіз үй қалашығы, ұлттық қолөнер шеберханалары және дәстүрлі ойындар алаңы. Этнофестивальдер мен туристік бағдарламаларды өткізуге бағытталған."
+        desc: "Көшпенділер орталығы — киіз үй қалашығы, ұлттық қолөнер шеберханалары және дәстүрлі ойындар алаңы. Этнофестивальдер мен туристік бағдарламаларды өткізуге бағытталған.",
+        video: "./video/suleiler.mp4" // YouTube embed URL or video file path - add your video URL here
       }
     };
 
@@ -938,7 +1085,10 @@
     }
 
     document.querySelectorAll('[data-open]').forEach(btn => {
-      btn.addEventListener('click', () => openModal(btn.getAttribute('data-open')));
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModal(btn.getAttribute('data-open'));
+      });
     });
 
     modal.addEventListener('click', (e) => {
@@ -946,12 +1096,102 @@
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape') {
+        closeModal();
+        closeVideoModal();
+      }
     });
 
+    // Video modal functionality
+    const videoModal = document.getElementById('videoModal');
+    const videoContainer = document.getElementById('videoContainer');
+    const videoModalTitle = document.getElementById('videoModalTitle');
+    const closeVideoBtn = document.getElementById('closeVideo');
+
+    function getYouTubeEmbedUrl(url) {
+      // Check if it's already an embed URL
+      if (url.includes('youtube.com/embed/') || url.includes('youtu.be/')) {
+        if (url.includes('youtu.be/')) {
+          const videoId = url.split('youtu.be/')[1].split('?')[0];
+          return `https://www.youtube.com/embed/${videoId}`;
+        }
+        return url;
+      }
+      // Check if it's a regular YouTube URL
+      if (url.includes('youtube.com/watch?v=')) {
+        const videoId = url.split('v=')[1].split('&')[0];
+        return `https://www.youtube.com/embed/${videoId}`;
+      }
+      return url;
+    }
+
+    function openVideoModal(key) {
+      const data = centers[key];
+      if (!data || !data.video) {
+        alert('Бейнежазба әзірше қосылмаған');
+        return;
+      }
+
+      videoModalTitle.textContent = data.title;
+      videoContainer.innerHTML = '';
+
+      let videoElement;
+      const videoUrl = data.video.trim();
+
+      if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+        // YouTube video
+        const embedUrl = getYouTubeEmbedUrl(videoUrl);
+        videoElement = document.createElement('iframe');
+        videoElement.src = embedUrl;
+        videoElement.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        videoElement.allowFullscreen = true;
+      } else if (videoUrl.endsWith('.mp4') || videoUrl.endsWith('.webm') || videoUrl.endsWith('.ogg')) {
+        // Local video file
+        videoElement = document.createElement('video');
+        videoElement.src = videoUrl;
+        videoElement.controls = true;
+        videoElement.autoplay = false;
+      } else {
+        // Assume it's an iframe embed URL
+        videoElement = document.createElement('iframe');
+        videoElement.src = videoUrl;
+        videoElement.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        videoElement.allowFullscreen = true;
+      }
+
+      videoContainer.appendChild(videoElement);
+      videoModal.classList.add('open');
+      videoModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+      videoModal.classList.remove('open');
+      videoModal.setAttribute('aria-hidden', 'true');
+      videoContainer.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    // Add event listeners for video buttons
+    document.querySelectorAll('[data-video]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openVideoModal(btn.getAttribute('data-video'));
+      });
+    });
+
+    // Close video modal
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal || e.target.id === 'closeVideo') {
+        closeVideoModal();
+      }
+    });
+
+    if (document.getElementById('learnMore')) {
     document.getElementById('learnMore').addEventListener('click', () => {
       alert('Бұл бөлімде жобаның техникалық сипаттамасы, сызбалар және қаржыландыру жоспары көрсетіледі (мысал).');
     });
+    }
 
     document.querySelectorAll('.card').forEach(card => {
       card.addEventListener('keydown', (e) => {
