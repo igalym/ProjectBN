@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Қызылорда жобалық орталықтары</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     
@@ -138,6 +139,22 @@
       overflow: hidden;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .tab-btn i {
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+    
+    .tab-btn:hover i {
+      transform: scale(1.1);
+    }
+    
+    .tab-btn.active i {
+      color: #fff;
     }
     
     .tab-btn::before {
@@ -482,6 +499,23 @@
       overflow: hidden;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .btn i {
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+    
+    .btn:hover i {
+      transform: scale(1.15);
+    }
+    
+    .btn span {
+      display: inline-block;
     }
     
     .btn::before {
@@ -530,11 +564,13 @@
       display: none;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(10px);
       z-index: 999;
       padding: 20px;
       animation: fadeIn 0.3s ease;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
     
     .modal.open {
@@ -554,6 +590,9 @@
       grid-template-columns: 1fr 480px;
       animation: modalSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
+      max-height: 90vh;
+      margin: auto;
+      align-self: center;
     }
     
     .modal-left {
@@ -577,6 +616,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       display: block;
       opacity: 0.95;
     }
@@ -585,6 +625,9 @@
       padding: 40px;
       display: flex;
       flex-direction: column;
+      overflow-y: auto;
+      max-height: 90vh;
+      -webkit-overflow-scrolling: touch;
     }
     
     .modal-right h2 {
@@ -619,7 +662,12 @@
     }
     
     .meta::before {
-      content: '📍';
+      content: '';
+      font-size: 16px;
+    }
+    
+    .meta i {
+      color: var(--accent);
       font-size: 16px;
     }
     
@@ -643,7 +691,7 @@
       width: 40px;
       height: 40px;
       padding: 0;
-      font-size: 28px;
+      font-size: 18px;
       font-weight: 300;
       line-height: 1;
       cursor: pointer;
@@ -654,17 +702,25 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
+    
+    .modal-close-btn i {
+      transition: transform 0.3s ease;
+    }
 
     .modal-close-btn:hover {
       background: rgba(239, 68, 68, 0.2);
       color: #ef4444;
       border-color: rgba(239, 68, 68, 0.4);
-      transform: rotate(90deg) scale(1.1);
+      transform: scale(1.1);
       box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+    }
+    
+    .modal-close-btn:hover i {
+      transform: rotate(90deg);
     }
 
     .modal-close-btn:active {
-      transform: rotate(90deg) scale(0.95);
+      transform: scale(0.95);
     }
     
     .visit-btn {
@@ -718,6 +774,10 @@
       overflow: hidden;
       animation: modalSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
+      max-height: 90vh;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
     }
 
     .video-container {
@@ -726,6 +786,8 @@
       padding-bottom: 56.25%; /* 16:9 aspect ratio */
       background: #000;
       overflow: hidden;
+      flex: 1;
+      min-height: 0;
     }
 
     .video-container iframe,
@@ -753,6 +815,14 @@
       font-weight: 700;
       color: var(--text-primary);
       margin: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .video-modal-header h2 i {
+      color: var(--accent);
+      font-size: 26px;
     }
 
     .video-close-btn {
@@ -763,7 +833,7 @@
       width: 40px;
       height: 40px;
       padding: 0;
-      font-size: 28px;
+      font-size: 18px;
       font-weight: 300;
       line-height: 1;
       cursor: pointer;
@@ -774,17 +844,25 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
+    
+    .video-close-btn i {
+      transition: transform 0.3s ease;
+    }
 
     .video-close-btn:hover {
       background: rgba(239, 68, 68, 0.2);
       color: #ef4444;
       border-color: rgba(239, 68, 68, 0.4);
-      transform: rotate(90deg) scale(1.1);
+      transform: scale(1.1);
       box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+    }
+    
+    .video-close-btn:hover i {
+      transform: rotate(90deg);
     }
 
     .video-close-btn:active {
-      transform: rotate(90deg) scale(0.95);
+      transform: scale(0.95);
     }
 
     footer {
@@ -909,44 +987,67 @@
       }
       
       .modal {
-        padding: 12px;
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
       }
       
       .modal-card {
         border-radius: 20px;
         max-width: 100%;
+        max-height: 95vh;
+        margin: auto;
+        align-self: center;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
       }
       
       .modal-left {
-        min-height: 220px;
+        min-height: 250px;
+        max-height: 40vh;
+        order: 1;
       }
       
       .modal-right {
-        padding: 24px;
+        padding: 24px 20px;
+        order: 2;
+        max-height: calc(95vh - 250px);
+        overflow-y: auto;
       }
       
       .modal-right h2 {
         font-size: 22px;
         margin-bottom: 12px;
+        line-height: 1.3;
       }
       
       .meta {
         font-size: 13px;
-        padding: 6px 12px;
+        padding: 8px 14px;
         margin-bottom: 16px;
       }
       
       .modal-right p {
         font-size: 15px;
         margin-bottom: 20px;
+        line-height: 1.7;
       }
 
       .modal-close-btn {
-        top: 16px;
-        right: 16px;
-        width: 36px;
-        height: 36px;
-        font-size: 24px;
+        top: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        z-index: 1001;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+      }
+      
+      .modal-close-btn i {
+        font-size: 18px;
       }
       
       .visit-btn {
@@ -958,21 +1059,41 @@
 
       .video-modal-card {
         max-width: 100%;
+        max-height: 95vh;
         border-radius: 20px;
+        margin: 0;
       }
 
       .video-modal-header {
         padding: 16px 20px;
+        flex-shrink: 0;
       }
 
       .video-modal-header h2 {
         font-size: 20px;
       }
+      
+      .video-modal-header h2 i {
+        font-size: 22px;
+      }
 
       .video-close-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 24px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        z-index: 1001;
+      }
+      
+      .video-close-btn i {
+        font-size: 18px;
+      }
+      
+      .video-container {
+        flex: 1;
+        min-height: 0;
+        max-height: calc(95vh - 80px);
       }
       
       footer {
@@ -1022,48 +1143,108 @@
         font-size: 13px;
       }
       
+      .modal {
+        padding: 5px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .modal-card {
+        max-height: 98vh;
+        border-radius: 16px;
+        margin: auto;
+        align-self: center;
+      }
+      
+      .modal-left {
+        min-height: 200px;
+        max-height: 35vh;
+      }
+      
       .modal-right {
-        padding: 20px;
+        padding: 20px 16px;
+        max-height: calc(98vh - 200px);
       }
       
       .modal-right h2 {
         font-size: 20px;
+        line-height: 1.3;
+        margin-bottom: 10px;
       }
       
       .modal-right p {
         font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+      
+      .meta {
+        font-size: 12px;
+        padding: 6px 12px;
+        margin-bottom: 14px;
       }
 
       .modal-close-btn {
-        top: 12px;
-        right: 12px;
-        width: 32px;
-        height: 32px;
-        font-size: 20px;
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+        background: rgba(0, 0, 0, 0.7);
+      }
+      
+      .modal-close-btn i {
+        font-size: 16px;
+      }
+      
+      .visit-btn {
+        padding: 12px 18px;
+        font-size: 13px;
       }
 
       .video-modal-card {
+        max-height: 98vh;
         border-radius: 16px;
+        margin: 0;
       }
 
       .video-modal-header {
         padding: 12px 16px;
         padding-right: 56px;
         position: relative;
+        flex-shrink: 0;
       }
 
       .video-modal-header h2 {
         font-size: 18px;
         margin-right: auto;
       }
+      
+      .video-modal-header h2 i {
+        font-size: 20px;
+      }
 
       .video-close-btn {
         position: absolute;
-        top: 12px;
-        right: 12px;
-        width: 32px;
-        height: 32px;
-        font-size: 20px;
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1001;
+      }
+      
+      .video-close-btn i {
+        font-size: 16px;
+      }
+      
+      .video-container {
+        flex: 1;
+        min-height: 0;
+        max-height: calc(98vh - 70px);
       }
     }
   </style>
@@ -1078,8 +1259,14 @@
 
   <main class="container">
     <div class="tabs-container">
-      <button class="tab-btn active" data-tab="centers">Жобалық орталықтар</button>
-      <button class="tab-btn" data-tab="waters">Емдік қасиетты сулар</button>
+      <button class="tab-btn active" data-tab="centers">
+        <i class="fas fa-building"></i>
+        <span>Жобалық орталықтар</span>
+      </button>
+      <button class="tab-btn" data-tab="waters">
+        <i class="fas fa-water"></i>
+        <span>Емдік қасиетты сулар</span>
+      </button>
     </div>
 
     <!-- Tab 1: Жобалық орталықтар -->
@@ -1110,8 +1297,14 @@
           <h3>Сүлейлер Аллеясы орталығы</h3>
           <p>Рухани-мәдени орталық: жыраулар мен ақындарға арналған аллея, ескерткіштер, шағын амфитеатр мен әдеби кештер алаңы.</p>
           <div class="actions">
-            <button class="btn" data-open="suleiler">Көру</button>
-            <button class="btn" data-video="suleiler">Бейнежазба</button>
+            <button class="btn" data-open="suleiler">
+              <i class="fas fa-eye"></i>
+              <span>Көру</span>
+            </button>
+            <button class="btn" data-video="suleiler">
+              <i class="fas fa-play-circle"></i>
+              <span>Бейнежазба</span>
+            </button>
           </div>
         </div>
       </article>
@@ -1124,8 +1317,14 @@
           <h3>Сыр күріші орталығы</h3>
           <p>Агро-туризм орталығы: күріш тарихы, интерактив экспозициялар, өңдеу зауыты макеті және экскурсиялық бағдарламалар.</p>
           <div class="actions">
-            <button class="btn" data-open="syr">Көру</button>
-            <button class="btn" data-video="syr">Бейнежазба</button>
+            <button class="btn" data-open="syr">
+              <i class="fas fa-eye"></i>
+              <span>Көру</span>
+            </button>
+            <button class="btn" data-video="syr">
+              <i class="fas fa-play-circle"></i>
+              <span>Бейнежазба</span>
+            </button>
           </div>
         </div>
       </article>
@@ -1138,8 +1337,14 @@
           <h3>Қорқыт ата орталығы</h3>
           <p>Түркі және қазақ мәдениеті бойынша музей-мұражай кешені: мультимедиа экспозициялар, музыка залы, халықаралық мәдени байланыстар.</p>
           <div class="actions">
-            <button class="btn" data-open="korkyt">Көру</button>
-            <button class="btn" data-video="korkyt">Бейнежазба</button>
+            <button class="btn" data-open="korkyt">
+              <i class="fas fa-eye"></i>
+              <span>Көру</span>
+            </button>
+            <button class="btn" data-video="korkyt">
+              <i class="fas fa-play-circle"></i>
+              <span>Бейнежазба</span>
+            </button>
           </div>
         </div>
       </article>
@@ -1152,8 +1357,14 @@
           <h3>Көшпенділер орталығы</h3>
           <p>Этнотуризм: киіз үй қалашығы, қолөнер шеберханалары, ұлттық ойындар мен ат спорты алаңдары.</p>
           <div class="actions">
-            <button class="btn" data-open="koshpendi">Көру</button>
-            <button class="btn" data-video="koshpendi">Бейнежазба</button>
+            <button class="btn" data-open="koshpendi">
+              <i class="fas fa-eye"></i>
+              <span>Көру</span>
+            </button>
+            <button class="btn" data-video="koshpendi">
+              <i class="fas fa-play-circle"></i>
+              <span>Бейнежазба</span>
+            </button>
           </div>
         </div>
       </article>
@@ -1172,7 +1383,10 @@
             Суының құрамында сынап бар. Сондықтан, ревматизм, қышыма, қотыр, тері аурулары және сүйек ауруларына ем. Ғалымдардың айтуынша Апанқақ суы минералды суларға, тұздарға бай, құрамында емдік химиялық элементтер көп болғандықтан асқазан, қуық безінің асқынуы, гемморой ауруларына да ем. Жаңақорған ауданынан 66 шақырым қашықтықта орналасқан. Шамамен 800 метр тереңдіктен шығатын шипалы судың температурасы 80 градус. Апанқақ суынан ем іздегендер қысы-жазы үзілмейді. Тіпті, шипа іздеп, Алматы, Қостанай, Атыраудан, яғни, Қазақстанның түкпір-түкпірінен келеді.
           </p>
           <div style="margin-top: 24px; display: flex; justify-content: center;">
-            <button class="btn" data-video="apankak" style="max-width: 300px; width: 100%;">Бейнежазба</button>
+            <button class="btn" data-video="apankak" style="max-width: 300px; width: 100%;">
+              <i class="fas fa-play-circle"></i>
+              <span>Бейнежазба</span>
+            </button>
           </div>
         </div>
       </section>
@@ -1184,13 +1398,18 @@
 
   <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal-card" role="document">
-      <button class="modal-close-btn" id="closeSimple" aria-label="Жабу">×</button>
+      <button class="modal-close-btn" id="closeSimple" aria-label="Жабу">
+        <i class="fas fa-times"></i>
+      </button>
       <div class="modal-left">
         <img id="modalImg" src="" alt="">
       </div>
       <div class="modal-right">
         <h2 id="modalTitle">Title</h2>
-        <div class="meta" id="modalMeta">Орналасқан жер</div>
+        <div class="meta" id="modalMeta">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Орналасқан жер</span>
+        </div>
         <p id="modalDesc">Толық сипаттама мұнда шығады...</p>
       </div>
     </div>
@@ -1199,8 +1418,13 @@
   <div id="videoModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="video-modal-card" role="document">
       <div class="video-modal-header">
-        <h2 id="videoModalTitle">Бейнежазба</h2>
-        <button class="video-close-btn" id="closeVideo" aria-label="Жабу">×</button>
+        <h2 id="videoModalTitle">
+          <i class="fas fa-play-circle"></i>
+          <span>Бейнежазба</span>
+        </h2>
+        <button class="video-close-btn" id="closeVideo" aria-label="Жабу">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
       <div class="video-container" id="videoContainer">
         <!-- Video will be inserted here -->
@@ -1304,7 +1528,12 @@
       modalImg.src = data.img;
       modalImg.alt = data.title;
       modalTitle.textContent = data.title;
-      modalMeta.textContent = data.meta;
+      const metaSpan = modalMeta.querySelector('span');
+      if (metaSpan) {
+        metaSpan.textContent = data.meta;
+      } else {
+        modalMeta.innerHTML = `<i class="fas fa-map-marker-alt"></i><span>${data.meta}</span>`;
+      }
       modalDesc.textContent = data.desc;
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
@@ -1325,8 +1554,19 @@
     });
 
     modal.addEventListener('click', (e) => {
-      if (e.target === modal || e.target.id === 'closeSimple') closeModal();
+      if (e.target === modal || e.target.id === 'closeSimple' || e.target.closest('#closeSimple')) {
+        closeModal();
+      }
     });
+    
+    // Add direct event listener for close button
+    const closeSimpleBtn = document.getElementById('closeSimple');
+    if (closeSimpleBtn) {
+      closeSimpleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeModal();
+      });
+    }
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
@@ -1416,10 +1656,18 @@
 
     // Close video modal
     videoModal.addEventListener('click', (e) => {
-      if (e.target === videoModal || e.target.id === 'closeVideo') {
+      if (e.target === videoModal || e.target.id === 'closeVideo' || e.target.closest('#closeVideo')) {
         closeVideoModal();
       }
     });
+    
+    // Add direct event listener for video close button
+    if (closeVideoBtn) {
+      closeVideoBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeVideoModal();
+      });
+    }
 
     if (document.getElementById('learnMore')) {
     document.getElementById('learnMore').addEventListener('click', () => {
